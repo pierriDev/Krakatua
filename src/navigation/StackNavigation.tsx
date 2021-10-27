@@ -1,0 +1,42 @@
+import { EHomeRoutes } from '../navigation/StackNavigation.type';
+import LoginScreen from '../screens/loginScreen';
+
+import { createStackNavigator } from '@react-navigation/stack';
+import { white } from 'native-base-theme/variables/colors';
+import React from 'react';
+
+const optionsScreen = {
+  headerShown: false,
+};
+
+export interface SettingsStackProps {
+  onLogout: () => void;
+  props: any;
+}
+
+const Home = createStackNavigator();
+export const HomeStack = () => (
+  <Home.Navigator initialRouteName="Home">
+    {/* <Home.Screen
+      name={EHomeRoutes.HOME_SCREEN}
+      component={HomeScreen}
+      options={optionsScreen}
+    /> */}
+  </Home.Navigator>
+);
+
+const LoginAndEnrollment = createStackNavigator();
+export const LoginAndEnrollmentStack = (props: any) => (
+  <LoginAndEnrollment.Navigator
+    screenOptions={{
+      headerShown: false,
+    }}
+    initialRouteName="Login"
+  >
+    <LoginAndEnrollment.Screen
+      name="Login"
+      component={LoginScreen}
+      initialParams={props}
+    />
+  </LoginAndEnrollment.Navigator>
+);

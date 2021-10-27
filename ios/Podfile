@@ -12,6 +12,8 @@ target 'Krakatua' do
     :hermes_enabled => false
   )
 
+  pod 'RNLocalize', :path => '../node_modules/react-native-localize'
+
   target 'KrakatuaTests' do
     inherit! :complete
     # Pods for testing
