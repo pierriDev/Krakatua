@@ -23,13 +23,13 @@ export const dark_grey_20 = 'rgba(102, 102, 102, 0.2)';
 export const dark_grey_10 = 'rgba(102, 102, 102, 0.1)';
 export const dark_grey_5 = 'rgba(102, 102, 102, 0.05)';
 
-export const mid_grey = 'rgba(150, 150, 150, 1.0)'; // #969696
-export const mid_grey_80 = 'rgba(150, 150, 150, 0.8)';
-export const mid_grey_60 = 'rgba(150, 150, 150, 0.6)';
-export const mid_grey_40 = 'rgba(150, 150, 150, 0.4)';
-export const mid_grey_20 = 'rgba(150, 150, 150, 0.2)';
-export const mid_grey_10 = 'rgba(150, 150, 150, 0.1)';
-export const mid_grey_5 = 'rgba(150, 150, 150, 0.05)';
+export const mid_grey = 'rgba(121, 121, 121, 1.0)'; // #797979
+export const mid_grey_80 = 'rgba(121, 121, 121, 0.8)';
+export const mid_grey_60 = 'rgba(121, 121, 121, 0.6)';
+export const mid_grey_40 = 'rgba(121, 121, 121, 0.4)';
+export const mid_grey_20 = 'rgba(121, 121, 121, 0.2)';
+export const mid_grey_10 = 'rgba(121, 121, 121, 0.1)';
+export const mid_grey_5 = 'rgba(121, 121, 121, 0.05)';
 
 export const light_grey = 'rgba(227, 227, 227, 1.0)';
 export const light_grey_80 = 'rgba(227, 227, 227, 0.8)';

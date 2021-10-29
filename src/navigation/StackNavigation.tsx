@@ -1,5 +1,7 @@
-import { EHomeRoutes } from '../navigation/StackNavigation.type';
-import LoginScreen from '../screens/loginScreen';
+import { EHomeRoutes } from '@/navigation/StackNavigation.type';
+import LoginScreen from '@/screens/loginScreen';
+import ForgotPasswordEmailScreen from '@/screens/forgotPasswordEmailScreen/ForgotPasswordEmailScreen';
+import ForgotPasswordCodeScreen from '@/screens/forgotPasswordCodecreen/ForgotPasswordCodeScreen';
 
 import { createStackNavigator } from '@react-navigation/stack';
 import { white } from 'native-base-theme/variables/colors';
@@ -36,6 +38,16 @@ export const LoginAndEnrollmentStack = (props: any) => (
     <LoginAndEnrollment.Screen
       name="Login"
       component={LoginScreen}
+      initialParams={props}
+    />
+    <LoginAndEnrollment.Screen
+      name="ForgotPasswordEmail"
+      component={ForgotPasswordEmailScreen}
+      initialParams={props}
+    />
+    <LoginAndEnrollment.Screen
+      name="ForgotPasswordCode"
+      component={ForgotPasswordCodeScreen}
       initialParams={props}
     />
   </LoginAndEnrollment.Navigator>
