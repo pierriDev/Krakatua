@@ -10,6 +10,7 @@ import React from 'react';
 import { ScrollView, Text, View } from 'react-native';
 import styles from './LoginScreen.styles';
 import type { LoginScreenViewProps } from './LoginScreen.types';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const LoginScreenView = ({ navigation, onLoginPress }: LoginScreenViewProps) => (
   <>
@@ -32,7 +33,11 @@ const LoginScreenView = ({ navigation, onLoginPress }: LoginScreenViewProps) => 
             outlined={false}
           />
         </View>
-        <Text style={styles.forgottenDetailsText}>{I18n.t('forgot_username_password')}</Text>
+        <TouchableOpacity
+          onPress={() => {navigation.navigate('ForgotPasswordEmail')}}
+        >
+          <Text style={styles.forgottenDetailsText}>{I18n.t('forgot_username_password')}</Text>
+        </TouchableOpacity>
         <View style={styles.signupNowButtonContainer}>
           <View style={styles.separator} />
           <Text style={styles.notEnrolledYetText}>{I18n.t('not_enrolled_yet')}</Text>
