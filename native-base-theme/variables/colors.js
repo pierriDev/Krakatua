@@ -2,18 +2,34 @@
 
 // Primary
 
-export const main_yellow    = 'rgba(227, 227, 0, 1.0)';
+export const main_yellow = 'rgba(227, 227, 0, 1.0)';
 export const main_yellow_80 = 'rgba(227, 227, 0, 0.8)';
 export const main_yellow_60 = 'rgba(227, 227, 0, 0.6)';
 export const main_yellow_40 = 'rgba(227, 227, 0, 0.4)';
 export const main_yellow_20 = 'rgba(227, 227, 0, 0.2)';
 export const main_yellow_10 = 'rgba(227, 227, 0, 0.1)';
-export const main_yellow_5  = 'rgba(227, 227, 0, 0.05)';
+export const main_yellow_5 = 'rgba(227, 227, 0, 0.05)';
 
 export const error_red = 'rgba(201, 58, 58, 1.0)'; // #c93a3a
 export const error_red_90 = 'rgba(201, 58, 58, 0.9)';
 
+export const gold = 'rgba(242, 200, 76, 1.0)';
+export const gold_90 = 'rgba(242, 200, 76, 0.9)';
+export const gold_80 = 'rgba(242, 200, 76, 0.8)';
+export const gold_60 = 'rgba(242, 200, 76, 0.6)';
+export const gold_40 = 'rgba(242, 200, 76, 0.4)';
+export const gold_20 = 'rgba(242, 200, 76, 0.2)';
+export const gold_10 = 'rgba(242, 200, 76, 0.1)';
+export const gold_5 = 'rgba(242, 200, 76, 0.05)';
+
 // Secondary
+export const sage_green = 'rgba(66, 150, 125, 1.0)'; // #42967D
+export const sage_green_80 = 'rgba(66, 150, 125, 0.8)';
+export const sage_green_60 = 'rgba(66, 150, 125, 0.6)';
+export const sage_green_40 = 'rgba(66, 150, 125, 0.4)';
+export const sage_green_20 = 'rgba(66, 150, 125, 0.2)';
+export const sage_green_10 = 'rgba(66, 150, 125, 0.1)';
+export const sage_green_5 = 'rgba(66, 150, 125, 0.05)';
 
 export const dark_grey = 'rgba(102, 102, 102, 1.0)';
 export const dark_grey_80 = 'rgba(102, 102, 102, 0.8)';

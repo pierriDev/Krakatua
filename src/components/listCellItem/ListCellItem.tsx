@@ -1,14 +1,10 @@
-import Icon from '@/components/icon';
-import { ultra_dark } from 'native-base-theme/variables/colors';
+import Icon from '@/components/icon/Icon';
+import {ultra_dark, white} from 'native-base-theme/variables/colors';
 import React from 'react';
-import {
-  Image, Text, TouchableOpacity, View,
-} from 'react-native';
-import type { ListCellItemProps } from '@/components/listCellItem';
-import { formatNumber } from '@/utils/numberUtils';
+import {Image, Text, TouchableOpacity, View} from 'react-native';
+import type {ListCellItemProps} from '@/components/listCellItem';
+import {formatNumber} from '@/utils/numberUtils';
 import styles from './ListCellItem.styles';
-
-const premierIcon = require('@/assets/images/premier_icon.png');
 
 const ICON_SIZE = 24;
 
@@ -26,6 +22,8 @@ const ListCellItem = ({
   leftIconType = 'star',
   rightContainerType = 'icon',
   isElevated = false,
+  hasRightIcon = true,
+  rightIconName = 'ChevronRight',
   rightContainerPrimaryText,
   rightContainerPrimaryTextStyle,
   rightContainerSecondaryText,
@@ -45,37 +43,36 @@ const ListCellItem = ({
   if (variant === 'financial' || variant === 'financial2') {
     const value = Number(rightContainerPrimaryText);
     const isNegative = value < 0;
-    const valueStyle = isNegative ? styles.financialNegativeText : styles.financialText2;
+    const valueStyle = isNegative
+      ? styles.financialNegativeText
+      : styles.financialText2;
     children = (
-      <View style={[
-        styles.financialRoot,
-        hasBorder && styles.contentBorder,
-        contentRootStyle]}
-      >
-        <View style={variant === 'financial'
-          ? styles.financialLeftTextContainer
-          : styles.financialLeftTextContainer2}
-        >
-          { primaryTextComponent || (
+      <View
+        style={[
+          styles.financialRoot,
+          hasBorder && styles.contentBorder,
+          contentRootStyle,
+        ]}>
+        <View
+          style={
+            variant === 'financial'
+              ? styles.financialLeftTextContainer
+              : styles.financialLeftTextContainer2
+          }>
+          {primaryTextComponent || (
             <Text
               style={[
                 variant === 'financial'
                   ? styles.financialText
                   : styles.financialTextVar2,
-                { color: primaryTextColor },
+                {color: primaryTextColor},
                 primaryTextStyle,
               ]}
-              numberOfLines={2}
-            >
+              numberOfLines={2}>
               {primaryText}
             </Text>
-          ) }
-          <Text
-            style={[
-              styles.financialText,
-              secondaryTextStyle,
-            ]}
-          >
+          )}
+          <Text style={[styles.financialText, secondaryTextStyle]}>
             {secondaryText}
           </Text>
         </View>
@@ -86,9 +83,12 @@ const ListCellItem = ({
               decimalPlaces: 2,
             })}
           </Text>
-          <Text style={styles.financialText3}>{rightContainerSecondaryText}</Text>
+          <Text style={styles.financialText3}>
+            {rightContainerSecondaryText}
+          </Text>
         </View>
-        <View style={[styles.financialIconContainer, financialIconContainerStyle]}>
+        <View
+          style={[styles.financialIconContainer, financialIconContainerStyle]}>
           <Icon
             name="ChevronRight"
             width={ICON_SIZE}
@@ -102,87 +102,103 @@ const ListCellItem = ({
     children = (
       <>
         {title ? <Text style={styles.title}>{title}</Text> : null}
-        <View style={[styles.contentRoot,
-          hasBorder && styles.contentBorder,
-          isElevated && styles.elevated,
-          contentRootStyle]}
-        >
-          {hasLeftIcon
-            ? (
-              <View
-                style={[styles.leftContainer, leftIconType === 'premier' && styles.premierContainer]}
-              >
-                {leftIconType !== 'premier'
-                  ? (
-                    <Icon
-                      name={iconName}
-                      width={ICON_SIZE}
-                      height={ICON_SIZE}
-                      color={leftIconColor}
-                    />
-                  )
-                  : <Image source={premierIcon} style={styles.image} />}
-              </View>
-            ) : null}
+        <View
+          style={[
+            styles.contentRoot,
+            hasBorder && styles.contentBorder,
+            isElevated && styles.elevated,
+            contentRootStyle,
+          ]}>
+          {hasLeftIcon ? (
+            <View
+              style={[
+                styles.leftContainer,
+                leftIconType === 'premier' && styles.premierContainer,
+              ]}>
+              {leftIconType !== 'premier' ? (
+                <Icon
+                  name={iconName}
+                  width={ICON_SIZE}
+                  height={ICON_SIZE}
+                  color={leftIconColor}
+                />
+              ) : (
+                <Icon
+                  name="Logo"
+                  width={ICON_SIZE}
+                  height={ICON_SIZE}
+                  color={white}
+                />
+              )}
+            </View>
+          ) : null}
           <View style={styles.middleContainer}>
             <TouchableOpacity onPress={onBodyPress || onRightIconPress}>
               <Text
-                style={[styles.primaryText, { color: primaryTextColor }, primaryTextStyle]}
-                numberOfLines={2}
-              >
+                style={[
+                  styles.primaryText,
+                  {color: primaryTextColor},
+                  primaryTextStyle,
+                ]}
+                numberOfLines={2}>
                 {primaryText}
               </Text>
-              {secondaryText
-                ? (
-                  <Text style={[styles.secondaryText, secondaryTextStyle]}>
-                    {secondaryText}
-                  </Text>
-                ) : null}
+              {secondaryText ? (
+                <Text style={[styles.secondaryText, secondaryTextStyle]}>
+                  {secondaryText}
+                </Text>
+              ) : null}
             </TouchableOpacity>
           </View>
-          <View style={styles.rightContainer}>
-            {rightContainerType === 'icon' ? (
-              <TouchableOpacity
-                onPress={onRightIconPress}
-                style={styles.iconContainer}
-                testID={rightIconTestId}
-              >
-                {customRightIcon || (
-                <Icon
-                  name="ChevronRight"
-                  width={ICON_SIZE}
-                  height={ICON_SIZE}
-                  color={rightIconColor}
-                />
-                ) }
-              </TouchableOpacity>
-            ) : null}
-            {rightContainerType === 'text' ? (
-              <View style={styles.textContainer}>
-                <Text style={[styles.rightContainerText,
-                  !rightContainerSecondaryText
-                                && styles.noSecondaryText]}
-                >
-                  {rightContainerPrimaryText}
-                </Text>
-                {rightContainerSecondaryText ? (
-                  <Text style={[styles.rightContainerText,
-                    styles.rightContainerSecondaryText]}
-                  >
-                    {rightContainerSecondaryText}
+          {hasRightIcon ? (
+            <View style={styles.rightContainer}>
+              {rightContainerType === 'icon' ? (
+                <TouchableOpacity
+                  onPress={onRightIconPress}
+                  style={styles.iconContainer}
+                  testID={rightIconTestId}>
+                  {customRightIcon || (
+                    <Icon
+                      name={rightIconName}
+                      width={ICON_SIZE}
+                      height={ICON_SIZE}
+                      color={rightIconColor}
+                    />
+                  )}
+                </TouchableOpacity>
+              ) : null}
+              {rightContainerType === 'text' ? (
+                <View style={styles.textContainer}>
+                  <Text
+                    style={[
+                      styles.rightContainerText,
+                      !rightContainerSecondaryText && styles.noSecondaryText,
+                    ]}>
+                    {rightContainerPrimaryText}
                   </Text>
-                ) : null}
-              </View>
-            ) : null}
-          </View>
+                  {rightContainerSecondaryText ? (
+                    <Text
+                      style={[
+                        styles.rightContainerText,
+                        styles.rightContainerSecondaryText,
+                      ]}>
+                      {rightContainerSecondaryText}
+                    </Text>
+                  ) : null}
+                </View>
+              ) : null}
+            </View>
+          ) : null}
         </View>
       </>
     );
   }
-  return (
-    onlyRightIconClickable
-      ? <View testID={testID}>{children}</View>
-      : <TouchableOpacity testID={testID} onPress={onRightIconPress}>{children}</TouchableOpacity>
+  return onlyRightIconClickable ? (
+    <View testID={testID}>{children}</View>
+  ) : (
+    <TouchableOpacity testID={testID} onPress={onRightIconPress}>
+      {children}
+    </TouchableOpacity>
   );
 };
 
