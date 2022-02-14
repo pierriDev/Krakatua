@@ -13,6 +13,8 @@ target 'Krakatua' do
   )
 
   pod 'RNLocalize', :path => '../node_modules/react-native-localize'
+  pod 'React-RCTText', :path => '../node_modules/react-native/Libraries/Text', :modular_headers => true
+
 
   target 'KrakatuaTests' do
     inherit! :complete

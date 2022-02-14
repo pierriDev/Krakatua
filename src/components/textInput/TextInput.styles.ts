@@ -1,6 +1,10 @@
 import {
-  dark_grey, error_red, mid_grey,
-  main_yellow, ultra_dark,
+  dark_grey, 
+  error_red, 
+  main_yellow,
+  mid_grey,
+  sage_green, 
+  ultra_dark,
 } from 'native-base-theme/variables/colors';
 import fonts from 'native-base-theme/variables/fonts';
 import { Platform, StyleSheet } from 'react-native';
@@ -54,6 +58,13 @@ const styles = StyleSheet.create({
       },
     }),
   },
+  editableText: {
+    ...fonts.body_book,
+    color: dark_grey,
+    position: 'absolute',
+    width: '100%',
+    top: 20,
+  },
   textInputAndroidAdjustment: {
     ...Platform.select({
       android: {
@@ -72,7 +83,7 @@ const styles = StyleSheet.create({
   },
   textButtonText: {
     ...fonts.subheadline_medium,
-    color: main_yellow,
+    color: sage_green,
   },
 });
 

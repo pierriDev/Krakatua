@@ -1,11 +1,6 @@
 import React, {useEffect, useState} from 'react';
-import {
-  View,
-  ScrollView,
-  Text,
-  TouchableOpacity,
-  SafeAreaView,
-} from 'react-native';
+import {EnrollmentScreenViewProps} from './EnrollmentScreen.types';
+import {View, ScrollView, Text, TouchableOpacity} from 'react-native';
 
 import Icon from '@/components/icon/Icon';
 import Background from '@/components/background/Background';
@@ -22,9 +17,18 @@ import AlertCard from '@/components/alertCard/AlertCard';
 import Button from '@/components/button';
 
 import styles from './EnrollmentScreen.styles';
-import {EnrollmentScreenViewProps} from './EnrollmentScreen.types';
+import SelectDropdown from '@/components/selectDropdown/SelectDropdown';
 
-const EnrollmentScreenView = ({navigation}: EnrollmentScreenViewProps) => {
+const EnrollmentScreenView = ({
+  treinos,
+  setIsVisible,
+  setClasstime,
+  classTime,
+  isVisible,
+  toggleClassModal,
+  handleBackButton,
+  handleOpenCamera,
+}: EnrollmentScreenViewProps) => {
   return (
     <>
       <Background />
@@ -33,7 +37,10 @@ const EnrollmentScreenView = ({navigation}: EnrollmentScreenViewProps) => {
       </View>
       <ScrollView style={styles.infoContainer}>
         <View style={styles.backContainer}>
-          <TouchableOpacity onPress={navigation.goBack}>
+          <TouchableOpacity
+            onPress={() => {
+              handleBackButton();
+            }}>
             <Icon name={'ChevronLeft'} width={34} height={33} color={black} />
           </TouchableOpacity>
         </View>
@@ -63,22 +70,50 @@ const EnrollmentScreenView = ({navigation}: EnrollmentScreenViewProps) => {
           <TextInput label={I18n.t('repeat_password_label')} />
         </View>
         <View style={styles.input}>
-          <ListCellItem
-            primaryText={I18n.t('training_label')}
-            primaryTextColor={mid_grey}
-            onBodyPress={() => {}}
-            onRightIconPress={() => {}}
-            hasLeftIcon={false}
-            rightIconName={'ChevronRight'}
-            rightIconColor={mid_grey}
+          {classTime ? (
+            <ListCellItem
+              primaryText={`${treinos[classTime - 1].titulo} | ${
+                treinos[classTime - 1].hora_inicio
+              } | ${treinos[classTime - 1].hora_final}`}
+              primaryTextColor={mid_grey}
+              onBodyPress={() => {
+                toggleClassModal();
+              }}
+              onRightIconPress={() => {
+                toggleClassModal();
+              }}
+              hasLeftIcon={false}
+              rightIconName={'ChevronRight'}
+              rightIconColor={mid_grey}
+            />
+          ) : (
+            <ListCellItem
+              primaryText={I18n.t('training_label')}
+              primaryTextColor={mid_grey}
+              onBodyPress={() => {
+                toggleClassModal();
+              }}
+              onRightIconPress={() => {
+                toggleClassModal();
+              }}
+              hasLeftIcon={false}
+              rightIconName={'ChevronRight'}
+              rightIconColor={mid_grey}
+            />
+          )}
+          <SelectDropdown
+            mapping={treinos}
+            visible={isVisible}
+            onPress={setClasstime}
+            closeModal={setIsVisible}
           />
         </View>
         <View style={styles.input}>
           <ListCellItem
             primaryText={I18n.t('photo_label')}
             primaryTextColor={mid_grey}
-            onBodyPress={() => {}}
-            onRightIconPress={() => {}}
+            onBodyPress={() => {handleOpenCamera()}}
+            onRightIconPress={() => {handleOpenCamera()}}
             hasRightIcon={false}
             hasLeftIcon={true}
             leftIconType={'Camera'}
@@ -96,7 +131,7 @@ const EnrollmentScreenView = ({navigation}: EnrollmentScreenViewProps) => {
         <View style={styles.input}>
           <Button
             title={I18n.t('contract_download_label')}
-            onPress={() => {}}
+            onPress={() => {handleOpenCamera()}}
           />
           <View style={styles.helperContent}>
             <AlertCard

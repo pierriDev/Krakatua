@@ -27,7 +27,7 @@ export default {
   training_label: 'Selecione o Horário do Treino',
   photo_label: 'Foto',
   photo_helper:
-    'Certifique-se que a foto esteja visível, esteja pegando o rosto do atleta e tenha uma boa iluminação',
+    'Certifique-se que a foto esteja visível. Que esteja pegando o rosto do atleta e tenha uma boa iluminação',
   contract_download_label: 'Fazer Download do Contrato',
   contract_helper_label: 'Preencha o contrato e anexe-o abaixo',
   contract_attach_label: 'Anexar Contrato',

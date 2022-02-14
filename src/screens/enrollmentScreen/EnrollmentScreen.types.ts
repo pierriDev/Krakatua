@@ -6,7 +6,14 @@ export interface EnrollmentScreenProps {
 }
 
 export interface EnrollmentScreenViewProps {
-  navigation: Navigation;
+  treinos: any;
+  setIsVisible: any;
+  setClasstime: any;
+  classTime: any;
+  isVisible: boolean;
+  toggleClassModal: any;
+  handleBackButton: any;
+  handleOpenCamera: any;
 }
 
 export interface sendCodeProps {

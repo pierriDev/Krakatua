@@ -1,56 +1,68 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useEffect, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import {
   Animated,
   NativeSyntheticEvent,
   Text,
-  TextInput as Input,
   TextInputFocusEventData,
   TouchableOpacity,
   View,
+  TextInput as TextInputNative,
 } from 'react-native';
-import { black } from '../../../native-base-theme/variables/colors';
+import TextInputMask from 'react-native-text-input-mask';
+import { black } from 'native-base-theme/variables/colors';
 import Icon from '../icon';
 import IconAndText from '../iconAndText/IconAndText';
+import ConditionalVisibility from '../conditionalVisibility/ConditionalVisibility';
 import styles from './TextInput.styles';
-import { InputBaseProps } from './TextInput.types';
+import type { TextInputProps } from './TextInput.types';
 
 const ICON_SIZE = 26;
 
-const TextInput = (props: InputBaseProps) => {
+const TextInput: FC<TextInputProps> = ({
+  label,
+  activeLabel,
+  value,
+  hasError,
+  textButtonCaption,
+  onRightButtonPress,
+  iconButtonName,
+  iconButtonColor = black,
+  iconAndText,
+  hintColor,
+  isEditable = false,
+  onFocus,
+  onBlur,
+  keyboardType,
+  containerStyle,
+  disableAnimation = false,
+  mask,
+  ...rest
+}) => {
+  const [isEditing, setIsEditing] = useState(true);
   const [isFocused, setIsFocused] = useState(false);
   const [animation] = useState(new Animated.Value(10));
-  const {
-    label,
-    activeLabel,
-    value,
-    hasError,
-    textButtonCaption,
-    onRightButtonPress,
-    iconButtonName,
-    iconButtonColor = black,
-    iconAndText,
-    hintColor,
-  } = props;
+
   const animatedStyles = {
     bottom: animation,
   };
 
   const handleFocus = (e: NativeSyntheticEvent<TextInputFocusEventData>) => {
     setIsFocused(true);
-    if (props.onFocus) {
-      props.onFocus(e);
+    if (onFocus) {
+      onFocus(e);
     }
   };
 
   const handleBlur = (e: NativeSyntheticEvent<TextInputFocusEventData>) => {
     setIsFocused(false);
-    if (props.onBlur) {
-      props.onBlur(e);
+    setIsEditing(false);
+    if (onBlur) {
+      onBlur(e);
     }
   };
 
-  const isActive = isFocused || value;
+  const isActive = isFocused || value || disableAnimation;
   const hasRightIcon = !!textButtonCaption || !!iconButtonName;
 
   const startAnimation = () => {
@@ -62,8 +74,7 @@ const TextInput = (props: InputBaseProps) => {
   };
 
   const bottomAdjustment = () => {
-    const { value: inputValue, keyboardType } = props;
-    if (!inputValue || keyboardType === 'visible-password') {
+    if (!value || keyboardType === 'visible-password') {
       return undefined;
     }
     return styles.textInputAndroidAdjustment;
@@ -89,7 +100,7 @@ const TextInput = (props: InputBaseProps) => {
   }, [isFocused]);
 
   return (
-    <View>
+    <View style={containerStyle}>
       <Animated.View style={[
         styles.container,
       ]}
@@ -125,23 +136,55 @@ const TextInput = (props: InputBaseProps) => {
             />
           </TouchableOpacity>
         ) : null}
-
-        <Input
-          {...props}
-          onFocus={handleFocus}
-          onBlur={handleBlur}
-          style={[
-            styles.textInput,
-            hasRightIcon && styles.textInputWithRightIcon,
-            bottomAdjustment(),
+        <ConditionalVisibility isVisible={!isEditable || isEditing}>
+          {mask ? (
+            <TextInputMask
+              {...rest}
+              mask={mask}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
+              value={value}
+              style={[
+                styles.textInput,
+                hasRightIcon && styles.textInputWithRightIcon,
+                bottomAdjustment(),
+              ]}
+              autoFocus={isEditable}
+            />
+          ) : (
+            <TextInputNative
+              {...rest}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
+              value={value}
+              style={[
+                styles.textInput,
+                hasRightIcon && styles.textInputWithRightIcon,
+                bottomAdjustment(),
+              ]}
+              autoFocus={isEditable}
+            />
+          )}
+          <View style={[
+            styles.line,
+            isFocused ? styles.borderSelected : styles.borderNormal,
+            hasError && styles.borderError,
           ]}
-        />
-        <View style={[
-          styles.line,
-          isFocused ? styles.borderSelected : styles.borderNormal,
-          hasError && styles.borderError,
-        ]}
-        />
+          />
+        </ConditionalVisibility>
+        <ConditionalVisibility isVisible={!isEditing && isEditable}>
+          <Text
+            style={styles.editableText}
+            onPress={() => {
+              setIsEditing(true);
+              setIsFocused(true);
+            }}
+            numberOfLines={2}
+          >
+            {value}
+          </Text>
+        </ConditionalVisibility>
+
       </Animated.View>
       {iconAndText ? (
         <IconAndText

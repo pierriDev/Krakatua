@@ -25,6 +25,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 30,
     paddingTop: 0,
     height: infoSize,
+    zIndex: 0,
   },
   backContainer: {
     paddingTop: 28,
@@ -36,9 +37,10 @@ const styles = StyleSheet.create({
   },
   input: {
     marginTop: 42,
+    zIndex: 1,
   },
   helperContent: {
-    marginTop: 16,
+    marginTop: 24,
   },
   buttonContainer: {
     marginTop: 42,
