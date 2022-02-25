@@ -1,3 +1,5 @@
+import Attach from './svgs/Attach';
+import Camera from './svgs/Camera';
 import Card from './svgs/Card';
 import ChevronDown from './svgs/ChevronDown';
 import ChevronLeft from './svgs/ChevronLeft';
@@ -28,7 +30,7 @@ import UserSettings from './svgs/UserSettings';
 import UserSettingsActive from './svgs/UserSettingsActive';
 import Warning from './svgs/Warning';
 import WarningRound from './svgs/WarningRound';
-import type { NameType } from './types';
+import type {NameType} from './types';
 
 const IconMap = {
   Home,
@@ -39,6 +41,8 @@ const IconMap = {
   InformationActive,
   Logo,
   Star,
+  Attach,
+  Camera,
   Card,
   CreditCard,
   Close,

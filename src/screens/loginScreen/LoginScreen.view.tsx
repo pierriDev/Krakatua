@@ -1,21 +1,21 @@
-import Background from '../../components/background/Background'
-import { Button } from '../../components/button/Button';
+import Background from '../../components/background/Background';
+import {Button} from '../../components/button/Button';
 import Icon from '../../components/icon';
 import JailBrokenModal from '../../components/modal/JailBrokeModal';
 import OfflineModal from '../../components/modal/OfflineModal';
 import TextInput from '../../components/textInput';
 import I18n from '../../localisation/I18n';
-import { white } from '../../../native-base-theme/variables/colors';
+import {white} from '../../../native-base-theme/variables/colors';
 import React from 'react';
-import { ScrollView, Text, View } from 'react-native';
+import {ScrollView, Text, View} from 'react-native';
 import styles from './LoginScreen.styles';
-import type { LoginScreenViewProps } from './LoginScreen.types';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import type {LoginScreenViewProps} from './LoginScreen.types';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 
-const LoginScreenView = ({ navigation, onLoginPress }: LoginScreenViewProps) => (
+const LoginScreenView = ({navigation, onLoginPress}: LoginScreenViewProps) => (
   <>
     <Background />
-    <ScrollView testID="loginScrollView" style={{ flex: 1 }} bounces={false}>
+    <ScrollView testID="loginScrollView" style={{flex: 1}} bounces={false}>
       <View style={styles.logoContainer}>
         <Icon name="Logo" width={200} height={50} color={white} />
       </View>
@@ -34,13 +34,18 @@ const LoginScreenView = ({ navigation, onLoginPress }: LoginScreenViewProps) => 
           />
         </View>
         <TouchableOpacity
-          onPress={() => {navigation.navigate('ForgotPasswordEmail')}}
-        >
-          <Text style={styles.forgottenDetailsText}>{I18n.t('forgot_username_password')}</Text>
+          onPress={() => {
+            navigation.navigate('ForgotPasswordEmail');
+          }}>
+          <Text style={styles.forgottenDetailsText}>
+            {I18n.t('forgot_username_password')}
+          </Text>
         </TouchableOpacity>
         <View style={styles.signupNowButtonContainer}>
           <View style={styles.separator} />
-          <Text style={styles.notEnrolledYetText}>{I18n.t('not_enrolled_yet')}</Text>
+          <Text style={styles.notEnrolledYetText}>
+            {I18n.t('not_enrolled_yet')}
+          </Text>
           <Button
             onPress={() => navigation.navigate('Enrollment')}
             title={I18n.t('login_signup_label')}

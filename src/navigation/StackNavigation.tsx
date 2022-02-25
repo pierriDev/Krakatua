@@ -1,11 +1,12 @@
-import { EHomeRoutes } from '@/navigation/StackNavigation.type';
-import LoginScreen from '@/screens/loginScreen';
-import ForgotPasswordEmailScreen from '@/screens/forgotPasswordEmailScreen/ForgotPasswordEmailScreen';
-import ForgotPasswordCodeScreen from '@/screens/forgotPasswordCodecreen/ForgotPasswordCodeScreen';
+import {EHomeRoutes} from '@/navigation/StackNavigation.type';
 import ChangePasswordScreen from '@/screens/changePasswordScreen/ChangePasswordScreen';
+import EnrollmentScreen from '@/screens/enrollmentScreen/EnrollmentScreen';
+import ForgotPasswordCodeScreen from '@/screens/forgotPasswordCodecreen/ForgotPasswordCodeScreen';
+import ForgotPasswordEmailScreen from '@/screens/forgotPasswordEmailScreen/ForgotPasswordEmailScreen';
+import LoginScreen from '@/screens/loginScreen';
 
-import { createStackNavigator } from '@react-navigation/stack';
-import { white } from 'native-base-theme/variables/colors';
+import {createStackNavigator} from '@react-navigation/stack';
+import {white} from 'native-base-theme/variables/colors';
 import React from 'react';
 
 const optionsScreen = {
@@ -34,8 +35,7 @@ export const LoginAndEnrollmentStack = (props: any) => (
     screenOptions={{
       headerShown: false,
     }}
-    initialRouteName="Login"
-  >
+    initialRouteName="Login">
     <LoginAndEnrollment.Screen
       name="Login"
       component={LoginScreen}
@@ -54,6 +54,11 @@ export const LoginAndEnrollmentStack = (props: any) => (
     <LoginAndEnrollment.Screen
       name="ChangePassword"
       component={ChangePasswordScreen}
+      initialParams={props}
+    />
+    <LoginAndEnrollment.Screen
+      name="Enrollment"
+      component={EnrollmentScreen}
       initialParams={props}
     />
   </LoginAndEnrollment.Navigator>

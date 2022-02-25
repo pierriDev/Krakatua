@@ -1,13 +1,15 @@
 import type { NameType } from '@/components/icon';
-import { TextInputProps } from 'react-native';
+import { ViewStyle } from 'react-native';
+import { TextInputMaskProps } from 'react-native-text-input-mask';
 
 export interface IconAndTextProps {
   type: 'info' | 'error',
   text: string,
-  testID?: string
+  testID?: string,
+  containerStyle?: ViewStyle,
 }
 
-export interface InputBaseProps extends TextInputProps{
+export interface TextInputProps extends TextInputMaskProps {
   label?: string;
   activeLabel?: string;
   hasError?: boolean;
@@ -17,4 +19,7 @@ export interface InputBaseProps extends TextInputProps{
   iconButtonColor?: string;
   iconAndText?: IconAndTextProps;
   hintColor?: string;
+  isEditable?: boolean;
+  containerStyle?: ViewStyle;
+  disableAnimation?: boolean;
 }
